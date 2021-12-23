@@ -41,7 +41,7 @@ def store_in_db(g_id, g_name):
 def store_images(g_id):
 	total_pics = 1200
 	hist = get_hand_hist()
-	cam = cv2.VideoCapture(1)
+	cam = cv2.VideoCapture(0)
 	if cam.read()[0]==False:
 		cam = cv2.VideoCapture(0)
 	x, y, w, h = 300, 100, 300, 300
@@ -64,7 +64,7 @@ def store_images(g_id):
 		thresh = cv2.merge((thresh,thresh,thresh))
 		thresh = cv2.cvtColor(thresh, cv2.COLOR_BGR2GRAY)
 		thresh = thresh[y:y+h, x:x+w]
-		contours = cv2.findContours(thresh.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)[1]
+		contours = cv2.findContours(thresh.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)[0]
 
 		if len(contours) > 0:
 			contour = max(contours, key = cv2.contourArea)
